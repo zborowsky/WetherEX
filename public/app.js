@@ -18,7 +18,22 @@ const KELVIN = 273;
 // API KEY
 const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
-getWeather();
+window.addEventListener('load', e => {
+    new getWeather();
+    registerSW(); 
+  });
+
+async function registerSW() { 
+  if ('serviceWorker' in navigator) { 
+    try {
+      await navigator.serviceWorker.register('/service-worker.js'); 
+    } catch (e) {
+      alert('ServiceWorker registration failed. Sorry about that.'); 
+    }
+  } else {
+    document.querySelector('.alert').removeAttribute('hidden'); 
+  }
+}
 
 // GET WEATHER FROM API PROVIDER
 function getWeather(){
