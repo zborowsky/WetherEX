@@ -19,7 +19,8 @@ const KELVIN = 273;
 const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
 window.addEventListener('load', e => {
-    new getWeather();
+    new getTodaysWeather();
+    new getForecast();
     registerSW(); 
   });
 
@@ -36,13 +37,13 @@ async function registerSW() {
 }
 
 // GET WEATHER FROM API PROVIDER
-function getWeather(){
+function getTodaysWeather(){
     let api = `https://api.openweathermap.org/data/2.5/weather?id=3094802&appid=${key}&lang=pl`;
     
     fetch(api)
         .then(function(response){
             let data = response.json();
-			console.log(data)
+      console.log(data)
             return data;
         })
         .then(function(data){
@@ -55,6 +56,55 @@ function getWeather(){
         .then(function(){
             displayWeather();
         });
+}
+
+
+function getForecast(){
+      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=pl`;
+      let fiveDayForecast = [];
+      fetch(api)
+        .then(function(response){
+            let data = response.json();
+      console.log(data)
+            return data;
+        })
+        .then(function(data){
+            var i;
+            for (i = 0; i < data.list.length; i++) {
+              fiveDayForecast.push({
+                  temperature: Math.floor(data.list[i].main.temp - KELVIN),
+                  description: data.list[i].weather[0].description,
+                  iconId: data.list[i].weather[0].icon
+                });
+            }
+            document.getElementById("content").appendChild(buildTable(fiveDayForecast));
+        }) 
+}
+
+function buildTable(data) {
+    var table = document.createElement("table");
+    table.className="table table-sm";
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+    var headRow = document.createElement("tr");
+    ["Name","Height","Country"].forEach(function(el) {
+      var th=document.createElement("th");
+      th.appendChild(document.createTextNode(el));
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead); 
+    data.forEach(function(el) {
+      var tr = document.createElement("tr");
+      for (var o in el) {  
+        var td = document.createElement("td");
+        td.appendChild(document.createTextNode(el[o]))
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);  
+    });
+    table.appendChild(tbody);             
+    return table;
 }
 
 // DISPLAY WEATHER TO UI

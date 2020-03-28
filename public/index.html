@@ -3,31 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather App - JavaScript</title>
-    <link rel="stylesheet" href="font/Rimouski.css">
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container">
-        <div class="app-title">
-            <p>Weather</p>
-        </div>
-        <div class="notification"> </div>
-        <div class="weather-container">
-            <div class="weather-icon">
-                <img src="icons/unknown.png" alt="">
+<body style="background-color: #293251;">
+    
+    <div class="container-fluid text-center">
+        <div class="row vh-100">
+            <div class="col-sm-2 sidenav" style="background-color: #F4F9FF;">
+                <div class"row">Zmień Miasto</div>
+                <div class"row">Dodaj Miasto</div>
+                <div class"row">Zaloguj się</div>
             </div>
-            <div class="temperature-value">
-                <p>- °<span>C</span></p>
+            <div class="col-sm-4">
+                <div class="app-title">
+                    <p>WeatherEx</p>
+                </div>
             </div>
-            <div class="temperature-description">
-                <p> - </p>
-            </div>
-            <div class="location">
-                <p>-</p>
-            </div>
+            <div class="col-sm-6 d-flex">
+                <div class="weather-container">
+                    <div class="weather-icon">
+                        <img src="icons/unknown.png" alt="">
+                    </div>
+
+                    <div class="temperature-value">
+                        <p>- °<span>C</span></p>
+                    </div>
+
+                    <div class="temperature-description">
+                        <p> - </p>
+                    </div>
+
+                    <div class="location">
+                        <p>-</p>
+                    </div>
+                </div>
         </div>
     </div>
     
