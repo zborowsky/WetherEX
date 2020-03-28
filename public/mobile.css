@@ -11,20 +11,21 @@ body{
 }
 
 .app-title p{
-    text-align: right;
-    margin-top: 50vh;
-    font-size: 2em;
-    color: #f8d7da;
+    text-align: center;
+    font-size: 4em;
+    color: #293251;
+    padding-top: 10vh;
 }
 
 .weather-container{
-    width: 18vw;
+    width: 74vw;
     height: 50vh;
     background-color: #F4F9FF;
-    display: inline-block;
-    margin: auto;
-    margin-left: 7%;
     border-radius: 8%;
+    margin-top: 25vh;
+    margin-bottom: 25vh;
+    margin-left: 13vw;
+    margin-right: 13vw;
 }
 
 .weather-icon img{
@@ -47,7 +48,7 @@ body{
 
 .temperature-value span{
     color: #293251;
-    font-size: 0.5em;
+    font-size: 1em;
 }
 
 .temperature-description{
@@ -59,7 +60,7 @@ body{
     margin: 0;
     color: #293251;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 2.4em;
 }
 
 .location{
@@ -71,7 +72,7 @@ body{
     padding: 0;
     color: #293251;
     text-align: center;
-    font-size: 1em;
+    font-size: 2em;
 }
 
 
