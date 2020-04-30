@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Weather App - JavaScript</title>
@@ -8,15 +9,28 @@
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+
+    <!-- Firebase auth ui  -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 </head>
+
 <body style="background-color: #293251;">
     <script type="text/javascript">
         if (screen.width <= 699) {
-        document.location = "mobile.html";
+            document.location = "mobile.html";
         }
-        </script>
+    </script>
     <div class="container">
+        <h1>Welcome to My Awesome Weather App</h1>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
         <div class="row vh-100">
             <div class="col-sm-5">
                 <div class="app-title">
@@ -41,10 +55,10 @@
                         <p>-</p>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
-    <script src="app.js"></script>
+        <script src="app.js"></script>
+        <script src="firebase-auth.js"></script>
 </body>
+
 </html>
-
-
