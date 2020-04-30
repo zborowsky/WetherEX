@@ -34,7 +34,7 @@
       </div>
 </nav>
 
-<div class="d-flex justify-content-center">
+<!-- <div class="d-flex justify-content-center">
   <select class="form-control town-select">
     <option selected>Kraków</option>
     <option value="1">Warszawa</option>
@@ -42,26 +42,41 @@
     <option value="3">Wrocław</option>
   </select>
 
-</div>
+</div> -->
 
 <div class="d-flex justify-content-center">
         <div class="weather-icon">
-            <img src="icons/01d.png" alt="">
+            <img src="icons/sunny.png" alt="">
         </div>
 </div>
 
 
 <div class="d-flex justify-content-center">
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-action active">Cras justo odio</li>
-    <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
-    <li class="list-group-item list-group-item-action">Morbi leo risus</li>
-    <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
-    <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
-</ul>
+  <p id="selectedCity" class="town">
 </div>
 
+<div class="d-flex justify-content-center">
+  <ul class="list-group">
+    <li id="temp1" class="list-group-item list-group-item-action rounded-top-right-20">Temperature: </li>
+    <li id="temp" class="list-group-item list-group-item-action active"></li>
+    <li id="feelLike1" class="list-group-item list-group-item-action">Feel Like: </li>
+    <li id="feelLike" class="list-group-item list-group-item-action active"></li>
 
+    <li id="humadity1" class="list-group-item list-group-item-action">Humidity: </li>
+    <li id="humadity" class="list-group-item list-group-item-action active"></li>
+
+    <li id="pressure1"class="list-group-item list-group-item-action">Pressure: </li>
+    <li id="pressure"class="list-group-item list-group-item-action active"></li>
+
+    <li id="wind1" class="list-group-item list-group-item-action">Description: </li>
+    <li id="description" class="list-group-item list-group-item-action rounded-bottom-20 active"></li>
+
+</ul>
+</div>
+<div class="history">
+  <button type="button" class="button-history">Add to history</button>
+</div>
+<script src="app.js"></script>
 
 
 </body>

@@ -2,17 +2,13 @@
     font-family: 'Comfortaa'
     , cursive;
 }
- 
+
 body{
     background-color: #293251;
 }
 
-.app-title{
-}
-
 .app-title p{
     text-align: right;
-    margin-top: 50vh;
     font-size: 2em;
     color: #f8d7da;
 }
@@ -51,7 +47,7 @@ body{
 }
 
 .temperature-description{
-    
+
 }
 
 .temperature-description p{
@@ -63,7 +59,7 @@ body{
 }
 
 .location{
-    
+
 }
 
 .location p{
@@ -73,6 +69,3 @@ body{
     text-align: center;
     font-size: 1em;
 }
-
-
-
