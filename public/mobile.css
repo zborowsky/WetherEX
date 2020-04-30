@@ -2,7 +2,7 @@
     font-family: 'Comfortaa'
     , cursive;
 }
- 
+
 body{
     background-color: #293251;
 }
@@ -17,21 +17,25 @@ body{
     padding-top: 10vh;
 }
 
-.weather-container{
-    width: 74vw;
-    height: 50vh;
+.weather-container-icon{
+    width: 75vw;
+    height: 25vh;
     background-color: #F4F9FF;
-    border-radius: 8%;
-    margin-top: 25vh;
-    margin-bottom: 25vh;
+    border-radius: 10%;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     margin-left: 13vw;
     margin-right: 13vw;
 }
-
 .weather-icon img{
     display: block;
-    margin: 0 auto;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    height:auto;
+    /* display: block; */
+    /* margin: 0 auto; */
+    /* text-align: center; */
 }
 
 .temperature-value p{
@@ -52,7 +56,7 @@ body{
 }
 
 .temperature-description{
-    
+
 }
 
 .temperature-description p{
@@ -64,7 +68,7 @@ body{
 }
 
 .location{
-    
+
 }
 
 .location p{
@@ -75,5 +79,31 @@ body{
     font-size: 2em;
 }
 
+.navbar {
+ margin-top: 3%;
+ font-size: 3em;
+}
 
+.navbar-nav .nav-link {
+    margin-right: 25px;
+    margin-left: 25px;
+}
 
+.container {
+  margin-top: 10%;
+}
+
+.town {
+  margin-top: 5%;
+  color:white;
+  font-size: 5em;
+}
+
+.town-select{
+  max-width: 40%;
+}
+
+.list-group-item.active{
+  background-color: #A8A8A8	 !important;
+  border-color: #A8A8A8 !important;
+}

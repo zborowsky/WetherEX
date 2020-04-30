@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App - JavaScript</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color: #293251;">
+    <script type="text/javascript">
+        if (screen.width >= 6990) {
+        document.location = "index.html";
+        }
+    </script>
+
+    <nav class="navbar navbar-expand-sm sticky-top navbar-dark info-color">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <li class="nav-item">
+                   <a class="nav-link waves-effect waves-light" href="history_mobile.html">History</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="forecast_mobile.html">Forecast</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="sign_in_mobile.html">Sign in</a>
+                </li>
+          </ul>
+      </div>
+</nav>
+
+<div class="d-flex justify-content-center">
+  <select class="form-control town-select">
+    <option selected>Kraków</option>
+    <option value="1">Warszawa</option>
+    <option value="2">Gdańsk</option>
+    <option value="3">Wrocław</option>
+  </select>
+
+</div>
+
+<div class="d-flex justify-content-center">
+        <div class="weather-icon">
+            <img src="icons/01d.png" alt="">
+        </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action active">Cras justo odio</li>
+    <li class="list-group-item list-group-item-action">Dapibus ac facilisis in</li>
+    <li class="list-group-item list-group-item-action">Morbi leo risus</li>
+    <li class="list-group-item list-group-item-action">Porta ac consectetur ac</li>
+    <li class="list-group-item list-group-item-action">Vestibulum at eros</li>
+</ul>
+</div>
+
+
+
+
+</body>
+</html>
