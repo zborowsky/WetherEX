@@ -1,9 +1,16 @@
 // SELECT ELEMENTS
 const iconElement = document.querySelector(".weather-icon");
-const tempElement = document.querySelector(".temperature-value p");
-const descElement = document.querySelector(".temperature-description p");
-const locationElement = document.querySelector(".location p");
-const notificationElement = document.querySelector(".notification");
+// const tempElement = document.querySelector(".temperature-value p");
+// const descElement = document.querySelector(".temperature-description p");
+
+// const notificationElement = document.querySelector(".notification");
+
+const locationElement = document.getElementById("selectedCity");
+const tempElement = document.getElementById("temp");
+const fellElement = document.getElementById("feelLike");
+const humadityElement = document.getElementById("humadity");
+const pressureElement = document.getElementById("pressure");
+const descElement = document.getElementById("description")
 
 // App data
 const weather = {};
@@ -20,34 +27,39 @@ const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
 window.addEventListener('load', e => {
     new getTodaysWeather();
-    new getForecast();
-    registerSW(); 
+    // new getForecast();
+    registerSW();
   });
 
-async function registerSW() { 
-  if ('serviceWorker' in navigator) { 
+async function registerSW() {
+  if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('/service-worker.js'); 
+      await navigator.serviceWorker.register('/service-worker.js');
     } catch (e) {
-      alert('ServiceWorker registration failed. Sorry about that.'); 
+      alert('ServiceWorker registration failed. Sorry about that.');
     }
   } else {
-    document.querySelector('.alert').removeAttribute('hidden'); 
+    document.querySelector('.alert').removeAttribute('hidden');
   }
 }
 
 // GET WEATHER FROM API PROVIDER
 function getTodaysWeather(){
-    let api = `https://api.openweathermap.org/data/2.5/weather?id=3094802&appid=${key}&lang=pl`;
-    
+    let api = `https://api.openweathermap.org/data/2.5/weather?id=3094802&appid=${key}&lang=en`;
+
     fetch(api)
         .then(function(response){
             let data = response.json();
-      console.log(data)
+
             return data;
         })
         .then(function(data){
+          console.log(data);
             weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+            weather.pressure = data.main.pressure;
+            weather.apparentTemperature =  Math.floor(data.main.feels_like - KELVIN);
+            weather.wind = data.weather.wind;
+            weather.humadity = data.main.humidity;
             weather.description = data.weather[0].description;
             weather.iconId = data.weather[0].icon;
             weather.city = data.name;
@@ -65,7 +77,6 @@ function getForecast(){
       fetch(api)
         .then(function(response){
             let data = response.json();
-      console.log(data)
             return data;
         })
         .then(function(data){
@@ -77,40 +88,18 @@ function getForecast(){
                   iconId: data.list[i].weather[0].icon
                 });
             }
-            document.getElementById("content").appendChild(buildTable(fiveDayForecast));
-        }) 
+          console.log(fiveDayForecast);
+        })
 }
 
-function buildTable(data) {
-    var table = document.createElement("table");
-    table.className="table table-sm";
-    var thead = document.createElement("thead");
-    var tbody = document.createElement("tbody");
-    var headRow = document.createElement("tr");
-    ["Name","Height","Country"].forEach(function(el) {
-      var th=document.createElement("th");
-      th.appendChild(document.createTextNode(el));
-      headRow.appendChild(th);
-    });
-    thead.appendChild(headRow);
-    table.appendChild(thead); 
-    data.forEach(function(el) {
-      var tr = document.createElement("tr");
-      for (var o in el) {  
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(el[o]))
-        tr.appendChild(td);
-      }
-      tbody.appendChild(tr);  
-    });
-    table.appendChild(tbody);             
-    return table;
-}
 
 // DISPLAY WEATHER TO UI
 function displayWeather(){
     iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+    fellElement.innerHTML = `${weather.apparentTemperature}°<span>C</span>`;
+    humadityElement.innerHTML = `${weather.humadity}%`;
+    pressureElement.innerHTML = `${weather.pressure} hPa`;
     descElement.innerHTML = weather.description;
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 }
@@ -123,16 +112,19 @@ function celsiusToFahrenheit(temperature){
 // WHEN THE USER CLICKS ON THE TEMPERATURE ELEMENET
 tempElement.addEventListener("click", function(){
     if(weather.temperature.value === undefined) return;
-    
+
     if(weather.temperature.unit == "celsius"){
         let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
+        let fahrenheit_feel=celsiusToFahrenheit(weather.apparentTemperature);
         fahrenheit = Math.floor(fahrenheit);
-        
+        fahrenheit_feel = Math.floor(fahrenheit_feel);
+
         tempElement.innerHTML = `${fahrenheit}°<span>F</span>`;
+        fellElement.innerHTML = `${fahrenheit_feel}°<span>F</span>`;
         weather.temperature.unit = "fahrenheit";
     }else{
         tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
+        fellElement.innerHTML = `${weather.apparentTemperature}°<span>C</span>`;
         weather.temperature.unit = "celsius"
     }
 });
-

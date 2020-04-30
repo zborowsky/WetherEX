@@ -2,36 +2,38 @@
     font-family: 'Comfortaa'
     , cursive;
 }
- 
+
 body{
     background-color: #293251;
+    max-height: 100px;
 }
 
 .app-title{
-}
-
-.app-title p{
     text-align: center;
     font-size: 4em;
-    color: #293251;
-    padding-top: 10vh;
+    color: white;
+    padding-top: 20vh;
 }
 
-.weather-container{
-    width: 74vw;
-    height: 50vh;
+.weather-container-icon{
+    width: 75vw;
+    height: 25vh;
     background-color: #F4F9FF;
-    border-radius: 8%;
-    margin-top: 25vh;
-    margin-bottom: 25vh;
+    border-radius: 10%;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
     margin-left: 13vw;
     margin-right: 13vw;
 }
-
 .weather-icon img{
     display: block;
-    margin: 0 auto;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    height:auto;
+    /* display: block; */
+    /* margin: 0 auto; */
+    /* text-align: center; */
 }
 
 .temperature-value p{
@@ -52,7 +54,7 @@ body{
 }
 
 .temperature-description{
-    
+
 }
 
 .temperature-description p{
@@ -64,7 +66,7 @@ body{
 }
 
 .location{
-    
+
 }
 
 .location p{
@@ -75,5 +77,108 @@ body{
     font-size: 2em;
 }
 
+.navbar {
+ margin-top: 3%;
+ font-size: 3em;
+}
+
+.navbar-nav .nav-link {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.container {
+  margin-top: 10%;
+}
+
+.town{
+  font-size: 5em !important;
+  color: white;
+}
+
+.town-select{
+  max-width: 40%;
+  margin-top: 5%;
+  font-size: 2em !important;
+}
+
+.list-group {
+  width: 70%;
+  font-size: 2em !important;
+}
+
+.list-group-item.active{
+  background-color: #C5CAE9 !important;
+  border-color: #C5CAE9 !important;
+  text-align: right;
+  color: #293251 !important;
+}
+
+.rounded-top-right-20 {
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+
+.rounded-bottom-20 {
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+}
+
+.history {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.button-history {
+  background-color: white; /* Green */
+  border: none;
+  color: #293251;
+  padding: 15px 32px;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2em;
+}
 
 
+.stored{
+  margin-top: 5%;
+  font-size: 3em !important;
+  color: white;
+  text-align: left;
+}
+
+.table{
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    background-color: white;
+    max-width: 80%;
+    border-radius: 20px;
+}
+
+.table tr {
+  text-align: center;
+}
+
+.table th {
+  background-color: #C5CAE9;
+  border-color: #C5CAE9;
+}
+
+.accordion {
+  width: 60%;
+}
+
+ul#horizontal-list {
+  padding-top: 16px;
+	list-style: none;
+      font-size: 1.5em;
+
+	}
+ul#horizontal-list li {
+		display: inline;
+    font-size: 1.5em;
+	}
