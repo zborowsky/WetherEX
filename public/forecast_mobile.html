@@ -9,6 +9,9 @@
     <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
 </head>
 <body style="background-color: #293251;">
     <script type="text/javascript">
@@ -28,7 +31,7 @@
                     <a class="nav-link waves-effect waves-light" href="forecast_mobile.html">Forecast</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light" href="sign_in_mobile.html">Sign in</a>
+                    <a class="nav-link waves-effect waves-light" href="sign_in_mobile.html" id="navItemSignIn">Sign in</a>
                 </li>
           </ul>
       </div>
@@ -77,7 +80,7 @@
   <button type="button" class="button-history">Add to history</button>
 </div>
 <script src="app.js"></script>
-
-
+<script src="./shared/firebaseInit.js"></script>
+<script src="./shared/updateUiOnSignIn.js"></script>
 </body>
 </html>

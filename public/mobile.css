@@ -182,3 +182,9 @@ ul#horizontal-list li {
 		display: inline;
     font-size: 1.5em;
   }
+
+#signInContainer ul {
+  color: white;
+  width: 100%;
+  font-size: 3em;
+}
