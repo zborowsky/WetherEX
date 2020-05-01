@@ -3,14 +3,14 @@ firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
       window.isSignedIn = true;
-      updatePageContent(user);
+      updateSignInPageContent(user);
     } else {
       // No user is signed in.
       window.isSignedIn = false;
     }
   });
 
-const updatePageContent = user => {
+const updateSignInPageContent = user => {
     const signInContainer = document.getElementById("signInContainer");
     const authContainer = document.getElementById("firebaseui-auth-container");
     const listElement = document.createElement("ul");

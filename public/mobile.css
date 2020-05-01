@@ -188,3 +188,17 @@ ul#horizontal-list li {
   width: 100%;
   font-size: 3em;
 }
+
+#citySelectionContainer {
+  display: flex;
+  justify-content: center;
+}
+#citySelectionContainer select {
+  width: 80%;
+  height: 100px;
+  font-size: 3em;
+}
+
+#citySelectionContainer option {
+  font-size: .5em;
+}
