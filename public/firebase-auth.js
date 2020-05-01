@@ -16,6 +16,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+            window.isSignedIn = true;
             return true;
         },
         uiShown: function () {
@@ -30,3 +31,19 @@ var uiConfig = {
 };
 
 ui.start('#firebaseui-auth-container', uiConfig);
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      window.isSignedIn = true;
+      updateNavLabel();
+    } else {
+      // No user is signed in.
+      window.isSignedIn = false;
+    }
+  });
+
+const updateNavLabel = () => {
+    const signInNavItem = document.querySelector('#navItemSignIn a');
+    signInNavItem.innerText = 'My Profile';
+}
