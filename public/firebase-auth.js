@@ -11,7 +11,6 @@ var uiConfig = {
         }
     },
     signInFlow: 'popup',
-    signInSuccessUrl: 'user.html',
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
