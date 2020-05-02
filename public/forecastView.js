@@ -91,10 +91,12 @@ const onAddToHistoryClick = () => {
         if(doc && doc.exists){
             const userData = doc.data();
             console.log(userData);
+            weather.date = getFormattedCurrentDate();
             userData.history.push(weather)
             docReference.set(userData);
         }
         else{
+            weather.date = getFormattedCurrentDate();
             docReference.set({history: [weather]});
         }
     });
@@ -108,4 +110,24 @@ const stripUndefined = obj => {
         }
     })
 
+}
+
+const getFormattedCurrentDate = () => {
+    var today = new Date();
+    var dd = today.getDate();
+
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    }
+    today = dd+'/'+mm+'/'+yyyy;
+
+    return today;
 }
