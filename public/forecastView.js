@@ -45,5 +45,27 @@ const appendCitySelectionElement = () => {
 }
 
 const onLocationChange = event => {
-    console.log(event.target.value);
+    let api = `https://api.openweathermap.org/data/2.5/weather?id=${event.target.value}&appid=4a89d59ce3f12e596683c0cf98f861f0&lang=en`;
+
+    fetch(api)
+        .then(function(response){
+            let data = response.json();
+
+            return data;
+        })
+        .then(function(data){
+            console.log(data);
+            weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+            weather.pressure = data.main.pressure;
+            weather.apparentTemperature =  Math.floor(data.main.feels_like - KELVIN);
+            weather.wind = data.weather.wind;
+            weather.humadity = data.main.humidity;
+            weather.description = data.weather[0].description;
+            weather.iconId = data.weather[0].icon;
+            weather.city = data.name;
+            weather.country = data.sys.country;
+        })
+        .then(function(){
+            displayWeather();
+        });
 }
