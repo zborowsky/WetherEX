@@ -10,7 +10,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   });
 
 updateHistoryPageContent = () => {
-    console.log("xD");
+    document.getElementById("historyNotLoggedInMessage").remove();
     const firestore = firebase.firestore();
     const userId = firebase.auth().currentUser.email;
     const docReference = firestore.collection("WeatherHistory").doc(userId);
@@ -21,7 +21,7 @@ updateHistoryPageContent = () => {
             populateAccordionElement(userData);
         }
         else{
-            console.log("no data");
+            displayMessage();
         }
     });
 }
@@ -82,9 +82,38 @@ const createCollapse = (weather, id) => {
 
     const cardBodyElement = document.createElement("div");
     cardBodyElement.setAttribute("class", "card-body");
-    cardBodyElement.innerText = weather.description;
+    
+    const listElement = document.createElement("ul");
+    const temperatureListElement = document.createElement("li");
+    temperatureListElement.innerText = "Temperature: " + weather.temperature.value + "°C";
 
+    const feelsLikeListElement = document.createElement("li");
+    feelsLikeListElement.innerText = "Feels like: " + weather.apparentTemperature + "°C";
+
+    const humidityListElement = document.createElement("li");
+    humidityListElement.innerText = "Humidity: " + weather.humadity + "%";
+
+    const pressureListElement = document.createElement("li");
+    pressureListElement.innerText = "Pressure: " + weather.pressure + "hPa";
+
+    const descriptionListElement = document.createElement("li");
+    descriptionListElement.innerText = "Description: " + weather.description;
+
+    listElement.appendChild(temperatureListElement);
+    listElement.appendChild(feelsLikeListElement);
+    listElement.appendChild(humidityListElement);
+    listElement.appendChild(pressureListElement);
+    listElement.appendChild(descriptionListElement);
+    cardBodyElement.appendChild(listElement);
     collapseElement.appendChild(cardBodyElement);
 
     return collapseElement;
+}
+
+const displayMessage = () => {
+    const h1Element = document.createElement("h1");
+    h1Element.setAttribute("id", "emptyHistoryHeading");
+    h1Element.innerText = "You haven't aved any weather yet.";
+
+    document.getElementById("accordionExample").appendChild(h1Element);
 }

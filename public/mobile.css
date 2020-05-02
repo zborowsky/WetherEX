@@ -206,3 +206,11 @@ ul.horizontal-list li {
 #citySelectionContainer option {
   font-size: .5em;
 }
+
+#emptyHistoryHeading {
+  color: white;
+}
+
+#historyNotLoggedInMessage {
+  color: white;
+}
