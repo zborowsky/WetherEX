@@ -13,6 +13,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 const updateForecastPageContent = user => {
     removeSelectedCityParagraph();
     appendCitySelectionElement();
+    appendAddToHistoryButton();
 }
 
 const removeSelectedCityParagraph = () => {
@@ -44,6 +45,16 @@ const appendCitySelectionElement = () => {
     citySelectContainer.appendChild(selectElement);
 }
 
+const appendAddToHistoryButton = () => {
+    const container = document.getElementById("addToHistoryButtonContainer");
+    const button = document.createElement("button");
+    button.setAttribute("type", "button");
+    button.setAttribute("class", "button-history");
+    button.innerText = "Add to history";
+    button.addEventListener("click", onAddToHistoryClick);
+    container.appendChild(button);
+}
+
 const onLocationChange = event => {
     let api = `https://api.openweathermap.org/data/2.5/weather?id=${event.target.value}&appid=4a89d59ce3f12e596683c0cf98f861f0&lang=en`;
 
@@ -68,4 +79,33 @@ const onLocationChange = event => {
         .then(function(){
             displayWeather();
         });
+}
+
+const onAddToHistoryClick = () => {
+    console.log(weather);
+    stripUndefined(weather);
+    const firestore = firebase.firestore();
+    const userId = firebase.auth().currentUser.email;
+    const docReference = firestore.collection("WeatherHistory").doc(userId);
+    docReference.get().then(doc => {
+        if(doc && doc.exists){
+            const userData = doc.data();
+            console.log(userData);
+            userData.history.push(weather)
+            docReference.set(userData);
+        }
+        else{
+            docReference.set({history: [weather]});
+        }
+    });
+}
+
+const stripUndefined = obj => {
+    const properties = Object.keys(obj);
+    properties.forEach(prop => {
+        if(obj[prop] === undefined){
+            delete obj[prop];
+        }
+    })
+
 }
