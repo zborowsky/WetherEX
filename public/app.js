@@ -14,6 +14,7 @@ const descElement = document.getElementById("description")
 
 // App data
 const weather = {};
+var storage = firebase.storage().ref();
 
 weather.temperature = {
     unit : "celsius"
@@ -67,6 +68,7 @@ function getTodaysWeather(){
         })
         .then(function(){
             displayWeather();
+            setBackground();
         });
 }
 
@@ -109,6 +111,25 @@ function celsiusToFahrenheit(temperature){
     return (temperature * 9/5) + 32;
 }
 
+function imageName() {
+    const temp = weather.temperature.value;
+      if (temp > 20) {
+        return 'hot.jpg'
+      } else if (temp > 10) {
+        return 'rain.jpg'
+      } else {
+        return 'cold.jpg'
+      }
+}
+
+function setBackground() {
+    storage.child(imageName()).getDownloadURL().then((url) => {
+        document.body.style.backgroundImage = `url(${url})`;
+      }).catch((error) => {
+          console.log(error)
+      });
+}
+
 // WHEN THE USER CLICKS ON THE TEMPERATURE ELEMENET
 tempElement.addEventListener("click", function(){
     if(weather.temperature.value === undefined) return;
@@ -128,3 +149,4 @@ tempElement.addEventListener("click", function(){
         weather.temperature.unit = "celsius"
     }
 });
+
