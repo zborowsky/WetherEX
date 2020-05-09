@@ -27,7 +27,7 @@ const KELVIN = 273;
 const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
 window.addEventListener('load', e => {
-    new getTodaysWeather();
+    getTodaysWeather();
     // new getForecast();
     registerSW();
   });
@@ -37,7 +37,7 @@ async function registerSW() {
     try {
       await navigator.serviceWorker.register('/service-worker.js');
     } catch (e) {
-      alert('ServiceWorker registration failed. Sorry about that.');
+      console.error('ServiceWorker registration failed. Sorry about that.');
     }
   } else {
     document.querySelector('.alert').removeAttribute('hidden');
