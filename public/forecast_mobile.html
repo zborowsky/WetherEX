@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 </head>
 <body style="background-color: #293251;">
     <script type="text/javascript">
@@ -78,9 +79,7 @@
 
 </ul>
 </div>
-<div class="history">
-  <button type="button" class="button-history">Add to history</button>
-</div>
+<div class="history" id="addToHistoryButtonContainer"></div>
 <script src="app.js"></script>
 <script src="./shared/firebaseInit.js"></script>
 <script src="./shared/updateUiOnSignIn.js"></script>
