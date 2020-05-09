@@ -14,6 +14,7 @@ const descElement = document.getElementById("description")
 
 // App data
 const weather = {};
+
 var storage = firebase.storage().ref();
 
 weather.temperature = {
@@ -27,8 +28,8 @@ const KELVIN = 273;
 const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
 window.addEventListener('load', e => {
-    getTodaysWeather();
-    // new getForecast();
+    new getTodaysWeather();
+    new getForecast();
     registerSW();
   });
 
@@ -68,7 +69,7 @@ function getTodaysWeather(){
         })
         .then(function(){
             displayWeather();
-            setBackground();
+            loadIcon();
         });
 }
 
@@ -97,7 +98,7 @@ function getForecast(){
 
 // DISPLAY WEATHER TO UI
 function displayWeather(){
-    iconElement.innerHTML = `<img src="icons/${weather.iconId}.png"/>`;
+  console.log(weather);
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     fellElement.innerHTML = `${weather.apparentTemperature}°<span>C</span>`;
     humadityElement.innerHTML = `${weather.humadity}%`;
@@ -106,29 +107,21 @@ function displayWeather(){
     locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 }
 
+function loadIcon(){
+  storage.child(weather.iconId + ".png")
+  .getDownloadURL()
+  .then((url) => {
+    iconElement.innerHTML = `<img src="${url}"/>`;
+  }).catch((error) => {
+      console.log(error)
+  });
+}
+
 // C to F conversion
 function celsiusToFahrenheit(temperature){
     return (temperature * 9/5) + 32;
 }
 
-function imageName() {
-    const temp = weather.temperature.value;
-      if (temp > 20) {
-        return 'hot.jpg'
-      } else if (temp > 10) {
-        return 'rain.jpg'
-      } else {
-        return 'cold.jpg'
-      }
-}
-
-function setBackground() {
-    storage.child(imageName()).getDownloadURL().then((url) => {
-        document.body.style.backgroundImage = `url(${url})`;
-      }).catch((error) => {
-          console.log(error)
-      });
-}
 
 // WHEN THE USER CLICKS ON THE TEMPERATURE ELEMENET
 tempElement.addEventListener("click", function(){
