@@ -78,6 +78,7 @@ const onLocationChange = event => {
         })
         .then(function(){
             displayWeather();
+            loadIcon();
         });
 }
 
