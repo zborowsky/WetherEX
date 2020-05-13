@@ -1,42 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Weather App - JavaScript</title>
     <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile.css">
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-storage.js"></script>
+
+
 </head>
-
 <body style="background-color: #293251;">
-    <script type="text/javascript">
-        if (screen.width <= 699) {
-            document.location = "forecast_mobile.html";
-        }
-    </script>
-    <div class="container">
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
-        <div class="row vh-100">
-            <div class="col-sm-5">
-                <div class="app-title">
-                    <p>WeatherEx</p>
-                </div>
-            </div>
 
+    <nav class="navbar navbar-expand-sm sticky-top navbar-dark info-color">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <li class="nav-item">
+                   <a class="nav-link waves-effect waves-light" href="history_mobile.html">History</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link waves-effect waves-light" href="index.html">Forecast</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link waves-effect waves-light" href="sign_in_mobile.html" id="navItemSignIn">Sign in</a>
+                </li>
+          </ul>
+      </div>
+</nav>
+
+<div class="btn-history" id="forecast_version"></div>
+
+<div class="d-flex justify-content-center">
+        <div class="weather-icon">
         </div>
-        <script src="firebase-init.js"></script>
-        <script src="firebase-auth.js"></script>
-        <script src="app.js"></script>
-</body>
+</div>
 
+<div class="d-flex justify-content-center">
+    <p id="selectedCity" class="town">
+</div>
+
+<div id="citySelectionContainer"></div>
+
+<div class="d-flex justify-content-center">
+  <ul class="list-group">
+    <li id="temp1" class="list-group-item list-group-item-action rounded-top-right-20">Temperature: </li>
+    <li id="temp" class="list-group-item list-group-item-action active"></li>
+    <li id="feelLike1" class="list-group-item list-group-item-action">Feel Like: </li>
+    <li id="feelLike" class="list-group-item list-group-item-action active"></li>
+
+    <li id="humadity1" class="list-group-item list-group-item-action">Humidity: </li>
+    <li id="humadity" class="list-group-item list-group-item-action active"></li>
+
+    <li id="pressure1"class="list-group-item list-group-item-action">Pressure: </li>
+    <li id="pressure"class="list-group-item list-group-item-action active"></li>
+
+    <li id="wind1" class="list-group-item list-group-item-action">Description: </li>
+    <li id="description" class="list-group-item list-group-item-action rounded-bottom-20 active"></li>
+  </ul>
+</div>
+
+<div class="history" id="addToHistoryButtonContainer"></div>
+<script src="./shared/firebaseInit.js"></script>
+<script src="./shared/updateUiOnSignIn.js"></script>
+<script src="weatherView.js"></script>
+<script src="app.js"></script>
+</body>
 </html>

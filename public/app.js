@@ -1,16 +1,12 @@
 // SELECT ELEMENTS
 const iconElement = document.querySelector(".weather-icon");
-// const tempElement = document.querySelector(".temperature-value p");
-// const descElement = document.querySelector(".temperature-description p");
-
-// const notificationElement = document.querySelector(".notification");
 
 const locationElement = document.getElementById("selectedCity");
 const tempElement = document.getElementById("temp");
 const fellElement = document.getElementById("feelLike");
 const humadityElement = document.getElementById("humadity");
 const pressureElement = document.getElementById("pressure");
-const descElement = document.getElementById("description")
+const descElement = document.getElementById("description");
 
 // App data
 const weather = {};
@@ -29,14 +25,13 @@ const key = "4a89d59ce3f12e596683c0cf98f861f0";
 
 window.addEventListener('load', e => {
     new getTodaysWeather();
-    new getForecast();
     registerSW();
   });
 
 async function registerSW() {
   if ('serviceWorker' in navigator) {
     try {
-      await navigator.serviceWorker.register('/service-worker.js');
+      await navigator.serviceWorker.register('service-worker.js');
     } catch (e) {
       console.error('ServiceWorker registration failed. Sorry about that.');
     }
@@ -45,7 +40,7 @@ async function registerSW() {
   }
 }
 
-// GET WEATHER FROM API PROVIDER
+
 function getTodaysWeather(){
     let api = `https://api.openweathermap.org/data/2.5/weather?id=3094802&appid=${key}&lang=en`;
 
@@ -60,7 +55,6 @@ function getTodaysWeather(){
             weather.temperature.value = Math.floor(data.main.temp - KELVIN);
             weather.pressure = data.main.pressure;
             weather.apparentTemperature =  Math.floor(data.main.feels_like - KELVIN);
-            weather.wind = data.weather.wind;
             weather.humadity = data.main.humidity;
             weather.description = data.weather[0].description;
             weather.iconId = data.weather[0].icon;
@@ -74,31 +68,7 @@ function getTodaysWeather(){
 }
 
 
-function getForecast(){
-      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=pl`;
-      let fiveDayForecast = [];
-      fetch(api)
-        .then(function(response){
-            let data = response.json();
-            return data;
-        })
-        .then(function(data){
-            var i;
-            for (i = 0; i < data.list.length; i++) {
-              fiveDayForecast.push({
-                  temperature: Math.floor(data.list[i].main.temp - KELVIN),
-                  description: data.list[i].weather[0].description,
-                  iconId: data.list[i].weather[0].icon
-                });
-            }
-          console.log(fiveDayForecast);
-        })
-}
-
-
-// DISPLAY WEATHER TO UI
 function displayWeather(){
-  console.log(weather);
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
     fellElement.innerHTML = `${weather.apparentTemperature}°<span>C</span>`;
     humadityElement.innerHTML = `${weather.humadity}%`;
@@ -142,4 +112,3 @@ tempElement.addEventListener("click", function(){
         weather.temperature.unit = "celsius"
     }
 });
-
