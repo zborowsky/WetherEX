@@ -7,6 +7,8 @@ window.addEventListener('load', e => {
     registerSW();
   });
 
+const KELVIN = 273;
+
 async function registerSW() {
   if ('serviceWorker' in navigator) {
     try {
@@ -21,7 +23,7 @@ async function registerSW() {
 
 
 function getForecast(){
-      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=en`;
+      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=en&unit=auto`;
       fetch(api)
         .then(function(response){
             let data = response.json();
@@ -32,8 +34,8 @@ function getForecast(){
             for (i = 0; i < data.list.length; i++) {
               fiveDayForecast.push([
                   data.list[i].dt_txt,
-                  data.list[i].main.temp,
-                  data.list[i].main.feels_like,
+                  Math.floor(data.list[i].main.temp - KELVIN),
+                  Math.floor(data.list[i].main.feels_like - KELVIN),
                   data.list[i].main.humidity,
                   data.list[i].main.pressure,
                   data.list[i].weather[0].description,

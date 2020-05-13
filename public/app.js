@@ -40,7 +40,6 @@ async function registerSW() {
   }
 }
 
-
 function getTodaysWeather(){
     let api = `https://api.openweathermap.org/data/2.5/weather?id=3094802&appid=${key}&lang=en`;
 
@@ -66,7 +65,6 @@ function getTodaysWeather(){
             loadIcon();
         });
 }
-
 
 function displayWeather(){
     tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
