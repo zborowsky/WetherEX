@@ -7,6 +7,8 @@ window.addEventListener('load', e => {
     registerSW();
   });
 
+const KELVIN = 273;
+
 async function registerSW() {
   if ('serviceWorker' in navigator) {
     try {
@@ -32,8 +34,8 @@ function getForecast(){
             for (i = 0; i < data.list.length; i++) {
               fiveDayForecast.push([
                   data.list[i].dt_txt,
-                  data.list[i].main.temp,
-                  data.list[i].main.feels_like,
+                  Math.floor(data.list[i].main.temp - KELVIN),
+                  Math.floor(data.list[i].main.feels_like - KELVIN),
                   data.list[i].main.humidity,
                   data.list[i].main.pressure,
                   data.list[i].weather[0].description,
