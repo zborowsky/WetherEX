@@ -11,9 +11,22 @@ firebase.auth().onAuthStateChanged(function(user) {
   });
 
 const updateForecastPageContent = user => {
+    appendButtons();
     removeSelectedCityParagraph();
     appendCitySelectionElement();
-    appendAddToHistoryButton();
+}
+
+const appendButtons = () => {
+    const containerr = document.getElementById("forecast_version");
+    const button2 = document.createElement("button");
+    button2.setAttribute("type", "button");
+    button2.setAttribute("class", "button-forecast");
+    button2.innerText = "1 day Forecast";
+    button2.addEventListener("click", function(){
+    document.location.href = 'index.html';
+});
+containerr.appendChild(button2);
+
 }
 
 const removeSelectedCityParagraph = () => {
@@ -23,6 +36,7 @@ const removeSelectedCityParagraph = () => {
 const appendCitySelectionElement = () => {
     const citySelectContainer = document.getElementById("citySelectionContainer");
     const selectElement = document.createElement("select");
+    selectElement.classList.add("form-control");
     selectElement.addEventListener("change", onLocationChange);
 
     const locations = [
@@ -45,18 +59,8 @@ const appendCitySelectionElement = () => {
     citySelectContainer.appendChild(selectElement);
 }
 
-const appendAddToHistoryButton = () => {
-    const container = document.getElementById("addToHistoryButtonContainer");
-    const button = document.createElement("button");
-    button.setAttribute("type", "button");
-    button.setAttribute("class", "button-history");
-    button.innerText = "Add to history";
-    button.addEventListener("click", onAddToHistoryClick);
-    container.appendChild(button);
-}
-
 const onLocationChange = event => {
-    let api = `https://api.openweathermap.org/data/2.5/weather?id=${event.target.value}&appid=4a89d59ce3f12e596683c0cf98f861f0&lang=en`;
+    let api = `https://api.openweathermap.org/data/2.5/forecast?id=${event.target.value}&appid=4a89d59ce3f12e596683c0cf98f861f0&lang=en`;
 
     fetch(api)
         .then(function(response){
@@ -65,70 +69,22 @@ const onLocationChange = event => {
             return data;
         })
         .then(function(data){
-            console.log(data);
-            weather.temperature.value = Math.floor(data.main.temp - KELVIN);
-            weather.pressure = data.main.pressure;
-            weather.apparentTemperature =  Math.floor(data.main.feels_like - KELVIN);
-            weather.wind = data.weather.wind;
-            weather.humadity = data.main.humidity;
-            weather.description = data.weather[0].description;
-            weather.iconId = data.weather[0].icon;
-            weather.city = data.name;
-            weather.country = data.sys.country;
+          fiveDayForecast.splice(0);
+          var i;
+          for (i = 0; i < data.list.length; i++) {
+            fiveDayForecast.push([
+                data.list[i].dt_txt,
+                Math.floor(data.list[i].main.temp - KELVIN),
+                Math.floor(data.list[i].main.feels_like - KELVIN),
+                data.list[i].main.humidity,
+                data.list[i].main.pressure,
+                data.list[i].weather[0].description,
+              ]);
+          }
         })
         .then(function(){
-            displayWeather();
-            loadIcon();
+          var actualTable = document.getElementById('forecast');
+          while (actualTable.firstChild) actualTable.removeChild(actualTable.firstChild);
+          displayForecast();
         });
-}
-
-const onAddToHistoryClick = () => {
-    console.log(weather);
-    stripUndefined(weather);
-    const firestore = firebase.firestore();
-    const userId = firebase.auth().currentUser.email;
-    const docReference = firestore.collection("WeatherHistory").doc(userId);
-    docReference.get().then(doc => {
-        if(doc && doc.exists){
-            const userData = doc.data();
-            console.log(userData);
-            weather.date = getFormattedCurrentDate();
-            userData.history.push(weather)
-            docReference.set(userData);
-        }
-        else{
-            weather.date = getFormattedCurrentDate();
-            docReference.set({history: [weather]});
-        }
-    });
-}
-
-const stripUndefined = obj => {
-    const properties = Object.keys(obj);
-    properties.forEach(prop => {
-        if(obj[prop] === undefined){
-            delete obj[prop];
-        }
-    })
-
-}
-
-const getFormattedCurrentDate = () => {
-    var today = new Date();
-    var dd = today.getDate();
-
-    var mm = today.getMonth()+1; 
-    var yyyy = today.getFullYear();
-    if(dd<10) 
-    {
-        dd='0'+dd;
-    } 
-
-    if(mm<10) 
-    {
-        mm='0'+mm;
-    }
-    today = dd+'/'+mm+'/'+yyyy;
-
-    return today;
 }
