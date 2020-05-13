@@ -60,31 +60,5 @@ const appendCitySelectionElement = () => {
 }
 
 const onLocationChange = event => {
-    let api = `https://api.openweathermap.org/data/2.5/forecast?id=${event.target.value}&appid=4a89d59ce3f12e596683c0cf98f861f0&lang=en`;
-
-    fetch(api)
-        .then(function(response){
-            let data = response.json();
-
-            return data;
-        })
-        .then(function(data){
-          fiveDayForecast.splice(0);
-          var i;
-          for (i = 0; i < data.list.length; i++) {
-            fiveDayForecast.push([
-                data.list[i].dt_txt,
-                Math.floor(data.list[i].main.temp - KELVIN),
-                Math.floor(data.list[i].main.feels_like - KELVIN),
-                data.list[i].main.humidity,
-                data.list[i].main.pressure,
-                data.list[i].weather[0].description,
-              ]);
-          }
-        })
-        .then(function(){
-          var actualTable = document.getElementById('forecast');
-          while (actualTable.firstChild) actualTable.removeChild(actualTable.firstChild);
-          displayForecast();
-        });
+    getTodaysWeather(event.target.value)
 }
