@@ -23,7 +23,7 @@ async function registerSW() {
 
 
 function getForecast(){
-      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=en&unit=auto`;
+      let api = `https://api.openweathermap.org/data/2.5/forecast?id=3094802&appid=${key}&lang=en`;
       fetch(api)
         .then(function(response){
             let data = response.json();
